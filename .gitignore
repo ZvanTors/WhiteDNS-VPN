@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.spec
+*.egg-info/
+dist/
+build/
+*.exe
+
+# Temporary files
+*.log
+*.tmp
+temp/
+*.json
+!servers_cache.json
+!settings.json
+
+# IDE
+.idea/
+.vscode/
+
+# Binary files (optional – if you want to avoid committing them)
+xray.exe
+wintun.dll
+logo.ico
+
+# OS
+Thumbs.db
