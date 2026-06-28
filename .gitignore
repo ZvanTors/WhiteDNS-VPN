@@ -21,10 +21,5 @@ temp/
 .idea/
 .vscode/
 
-# Binary files (optional – if you want to avoid committing them)
-xray.exe
-wintun.dll
-logo.ico
-
 # OS
 Thumbs.db
