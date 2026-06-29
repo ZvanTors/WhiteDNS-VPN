@@ -39,7 +39,7 @@ SETTINGS_FILE = "settings.json"
 # ─── TUN constants ────────────────────────────────────────────────
 TUN_STACK = "system"
 TUN_GATEWAY = "10.0.0.2"
-TUN_INTERFACE_NAME = "Teria VPN"
+TUN_INTERFACE_NAME = "Teria VPN"        # changed from WhiteDNS VPN
 TUN_METRIC = 1
 
 # ─── paths ────────────────────────────────────────────────────────
@@ -73,6 +73,12 @@ def parse_vless_url(url: str) -> dict:
             comment = urllib.parse.unquote(comment)
         else:
             url_part, comment = url, ""
+
+        # Clean up any @WhiteDNS mentions (with optional spaces around)
+        clean_comment = re.sub(r'\s*@WhiteDNS\s*', '', comment).strip()
+        # Collapse multiple spaces into one
+        clean_comment = re.sub(r'\s+', ' ', clean_comment)
+
         parsed = urllib.parse.urlparse(url_part)
         uuid = parsed.username
         host = parsed.hostname
@@ -133,10 +139,9 @@ def parse_vless_url(url: str) -> dict:
                 "allowInsecure": False,
                 "fingerprint": fp
             }
-        comment_parts = comment.split("|") if comment else []
+        comment_parts = clean_comment.split("|") if clean_comment else []
         country = ""
         speed = "N/A"
-        extra_info = comment
         if len(comment_parts) >= 2:
             first_part = comment_parts[0].strip()
             flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', first_part)
@@ -146,10 +151,10 @@ def parse_vless_url(url: str) -> dict:
         return {
             "outbound": outbound,
             "display": {
-                "comment": comment,
+                "comment": comment,          # original (not used for display)
                 "country": country,
                 "speed": speed,
-                "full_comment": extra_info
+                "full_comment": clean_comment
             }
         }
     except Exception as e:
@@ -201,7 +206,7 @@ def build_inbound(mode: str):
                 "stack": TUN_STACK,
                 "address": ["10.0.0.1/30"],
                 "gateway": [f"{TUN_GATEWAY}/30"],
-                "name": TUN_INTERFACE_NAME,
+                "name": TUN_INTERFACE_NAME,      # "Teria VPN"
                 "metric": TUN_METRIC,
                 "dns": ["1.1.1.1", "8.8.8.8"]
             },
@@ -443,7 +448,6 @@ class MainWindow(QMainWindow):
         self.kill_switch_enabled = self.settings.get("kill_switch", False)
         self.run_on_startup = self.settings.get("run_on_startup", False)
 
-        # Apply startup setting on launch
         if self.run_on_startup:
             set_run_on_startup(True)
 
@@ -510,7 +514,7 @@ class MainWindow(QMainWindow):
         self.server_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.server_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
         self.server_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.Fixed)
-        self.server_table.setColumnWidth(3, 80)  # فضای کافی برای دکمه بدون افتادن زیر اسکرول
+        self.server_table.setColumnWidth(3, 80)
         self.server_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.server_table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.server_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -671,7 +675,7 @@ class MainWindow(QMainWindow):
             # Ping
             ping_text = self.ping_results.get(i, "")
             self.server_table.setItem(i, 1, QTableWidgetItem(ping_text))
-            # Info
+            # Info (clean)
             self.server_table.setItem(i, 2, QTableWidgetItem(disp["full_comment"]))
             # Delete button
             delete_btn = QPushButton("Delete")
