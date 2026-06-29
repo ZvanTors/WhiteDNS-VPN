@@ -1,4 +1,4 @@
-# WhiteDNS VPN
+# Teria VPN
 
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -8,7 +8,7 @@
 A modern, sleek VPN client for Windows with **Proxy Mode** and **Full VPN (TUN)** support, powered by [Xray core](https://github.com/XTLS/Xray-core).
 
 <p align="center">
-  <img src="screenshot.png" alt="WhiteDNS VPN Screenshot" width="800"/>
+  <img src="screenshot.png" alt="Teria VPN Screenshot" width="800"/>
 </p>
 
 ## ✨ Features
@@ -31,8 +31,8 @@ A modern, sleek VPN client for Windows with **Proxy Mode** and **Full VPN (TUN)*
 
 ### Running from source
 
-- git clone https://github.com/ZvanTors/WhiteDNS-VPN.git
-- cd WhiteDNS-VPN
+- git clone https://github.com/ZvanTors/Teria-VPN.git
+- cd Teria-VPN
 - pip install -r requirements.txt
 - python main.py
 
@@ -50,7 +50,7 @@ A modern, sleek VPN client for Windows with **Proxy Mode** and **Full VPN (TUN)*
 - Click Connect.
 
 - In Proxy Mode, your SOCKS5 proxy is available at 127.0.0.1:10890.
-- In Full VPN mode, the app will ask for administrator privileges and create a WhiteDNS VPN network adapter.
+- In Full VPN mode, the app will ask for administrator privileges and create a Teria VPN network adapter.
 
 - Use Ping All to test real latency of all servers.
 - To delete a server, click the Delete button on its row and confirm.
@@ -60,14 +60,14 @@ A modern, sleek VPN client for Windows with **Proxy Mode** and **Full VPN (TUN)*
 Click the Settings button to configure:
 
 - Kill Switch – when enabled, if the VPN connection drops unexpectedly, your internet will remain blocked (in Full VPN mode) to prevent IP leaks.
-- Run on Windows startup – automatically launch WhiteDNS VPN when Windows starts (works in compiled EXE).
+- Run on Windows startup – automatically launch Teria VPN when Windows starts (works in compiled EXE).
 - Settings are saved automatically and persist across restarts.
 
 ### 🛠️ Build from source
 
 To create a standalone EXE with UAC admin:
 
-- pyinstaller --onefile --windowed --name "WhiteDNS VPN" --icon=logo.ico --add-data "xray.exe;." --add-data "wintun.dll;." --uac-admin main.py
+- pyinstaller --onefile --windowed --name "Teria VPN" --icon=logo.ico --add-data "xray.exe;." --add-data "wintun.dll;." --uac-admin main.py
 
 Make sure xray.exe, wintun.dll, and logo.ico are in the same folder.
 

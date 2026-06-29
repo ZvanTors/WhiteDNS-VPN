@@ -30,7 +30,7 @@ from PySide6.QtWidgets import (
 
 # ─── constants ───────────────────────────────────────────────────
 DEFAULT_SUB_URL = "https://sub.whitedns.shop/sub/base64.txt"
-APP_NAME = "WhiteDNS VPN"
+APP_NAME = "Teria VPN"
 APP_VERSION = "v1.0.0"
 PROXY_PORT = 10890
 CACHE_FILE = "servers_cache.json"
@@ -39,7 +39,7 @@ SETTINGS_FILE = "settings.json"
 # ─── TUN constants ────────────────────────────────────────────────
 TUN_STACK = "system"
 TUN_GATEWAY = "10.0.0.2"
-TUN_INTERFACE_NAME = "WhiteDNS VPN"
+TUN_INTERFACE_NAME = "Teria VPN"
 TUN_METRIC = 1
 
 # ─── paths ────────────────────────────────────────────────────────
@@ -570,7 +570,7 @@ class MainWindow(QMainWindow):
         version_lbl.setFont(QFont("Segoe UI", 9))
         footer.addWidget(version_lbl)
         footer.addStretch()
-        made_by = QLabel("Made With ❤️ By AmooReza ( WhiteDNS )")
+        made_by = QLabel("Made With ❤️ By AmooReza")
         made_by.setFont(QFont("Segoe UI", 9))
         footer.addWidget(made_by)
         main_layout.addLayout(footer)
